@@ -58,7 +58,7 @@ The maker form contains settings pertaining to the skin preview. Enabling the pr
 This mod spawned from an [experimental mod by Aurailus](https://github.com/Aurailus/tc/) that attempted to allow dynamic creation of textures at runtime. This mod is limited to 16x16 textures due to the method used and the limitations of the Minetest engine.  
 
 #### The Gist ####
-Each texture is a `[combine` modifier composed of a lot of `[colorize` modifiers, 1568 of them to be exact. This, in turn, creates a massive string that can be used as a texture.  
+Each texture is a `[combine` modifier composed of a lot of `[colorize` modifiers, 1568 of them to be exact. This, in turn, creates a massive string that can be used as a texture. Painting is done using `Raycast()`.  
 
 #### The Drawbacks ####
 The reason Aurailus' mod is limited to 16x16 is the hard limit on texture modifiers used in nodes. Entities do not share this limit. Entities *do*, on the other hand, have a limit of how large a serialized table can be. If the `textures` table contains more than 65535 bytes, Minetest will silently segfault with no errors (or give a serialization error). For this reason, the pixel image is named `px.png`, in order to keep the string as small as possible. However, even with a short image name, 64x32 (2048) colorize modifiers brings the string size to around 70000 bytes. In order to circumvent this, all unused parts of the skin are left out, bringing the string size down to around 50000 bytes.  
