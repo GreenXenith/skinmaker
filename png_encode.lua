@@ -169,6 +169,8 @@ Library.
 
 ]]--
 
+local bit = dofile(minetest.get_modpath(minetest.get_current_modname()) .. "/bitop.lua")
+
 local png = {}
 png.__index = png
 
